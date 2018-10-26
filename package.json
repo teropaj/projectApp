@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/teropaj/projectApp/issues"
   },
-  "homepage": "https://github.com/teropaj/projectApp#readme"
+  "homepage": "https://github.com/teropaj/projectApp#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
