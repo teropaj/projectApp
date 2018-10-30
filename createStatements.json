@@ -1,0 +1,25 @@
+{
+  "debug":true,
+  "host":"localhost",
+  "mysqlport":3306,
+  "admin":"fandt",
+  "adminpassword":"fandt",
+  "user":"saku",
+  "password":"fandt",
+  "database":"projectappdb",
+  "dropuser":true,
+  "tables":[
+    {
+      "name":"person",
+      "fields":[
+        "personId integer not null primary key",
+        "login varchar(20) not null",
+        "password varchar(30) not null"
+      ],
+      "data":[
+        [1,"user1","user1"],
+        [2,"Pirkko","Puro"]
+      ]
+    }
+  ]
+}
