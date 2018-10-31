@@ -8,7 +8,18 @@ let message='';
 const statements=require('./createStatements.json');
 const Database=require('./databaseDebug');
 
-let database=new Database(statements.createOptions);
+console.log('statements '+statements)
+
+const createOptions={
+  host:statements.host,
+  port:statements.mysqlport,
+  user:statements.admin,
+  password:statements.adminpassword,
+  database: "projectappdb"
+};
+
+console.log('****createOptions '+createOptions)
+let database=new Database(createOptions);
 
 const querys={allusers:`select * from person`}
 
@@ -46,6 +57,8 @@ app.post('/upload', function(req, res) {
 });
 
 //app.get('/',)
+app.get('/', (req, res) => res.send('Hello World!'))
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
