@@ -1,12 +1,18 @@
+
 const express = require('express');
+const path=require('path');
 const fileUpload = require('express-fileupload');
+const bodyParser=require('body-parser');
 const app = express();
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname,'public')));
 const port =8000;
 let message='';
 let users;
 //open databaseClass
 const statements=require('./createStatements.json');
 const Database=require('./databaseDebug');
+const urlencodedParser=bodyParser.urlencoded({extended:false});
 
 // app.set('view engine', 'ejs');
 // app.set('views',path.join('pageViews'))
@@ -46,7 +52,7 @@ console.log('debugger after')
 app.use(fileUpload());
 
 
-app.post('/login',(req,res)=>managers(req,res));
+//app.post('/login',(req,res)=>managers(req,res));
 app.post('/upload', function(req, res) {
   if (Object.keys(req.files).length == 0) {
     return res.status(400).send('No files were uploaded.');
@@ -65,7 +71,8 @@ app.post('/upload', function(req, res) {
 });
 
 //app.get('/',)
-app.get('/', (req, res) => res.send("Hello world"))
+//app.get('/', (req, res) => res.send("Hello world"))
+app.get('/', (req, res) => res.render('index.html'))
 app.get('/users',(req,res)=>takeUsers(req,res));
 app.get('/api/customers', (req, res) => {
   const customers = [
@@ -93,4 +100,25 @@ function managers(req,res){
 
 } //functioni ends
 
-debugger
+
+app.post('/login',urlencodedParser,(req,res)=>{
+  if(!req.body) {
+    return res.sendStatus(400);
+  }
+  else {
+    res.writeHead(200, {'content-type':'text/html'});
+    res.write(`<!DOCTYPE html>
+      <html>
+        <head>
+           <meta charset="utf-8">
+           <title>Data sent</title>
+        </head>
+        <body>
+          <h1>Your name</h1>
+          `);
+
+    res.write(`<p>${req.body.firstname} ${req.body.lastname}</p>`);
+    res.end(`</body>
+         </html>`);
+  }
+});
