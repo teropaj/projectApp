@@ -37,7 +37,7 @@ function takeUsers(req,res) {
     console.log('****takeUsers')
     let gears;
     database.doQuery(querys.allusers).then(data=>
-      res.send(data))
+      res.send(data));
 
 }
 //console.log(message)
